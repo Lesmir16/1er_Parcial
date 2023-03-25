@@ -1,0 +1,162 @@
+//Codelab de Seguridad Nula
+
+//- Tipos anulables y no anulables
+
+//Ejercicio Tipos que no aceptan valores NULL
+void main() {
+  int a;
+  a = null;
+  print('a is $a.');
+}
+
+//Ejercicio Tipos anulables
+void main() {
+  int a;
+  a = null;
+  print('a is $a.');
+}
+
+//Ejercicio Parametros de tipo anulable para genericos
+void main() {
+  List<String> aListOfStrings = ['one', 'two', 'three'];
+  List<String> aNullableListOfStrings;
+  List<String> aListOfNullableStrings = ['one', null, 'three'];
+
+  print('aListOfStrings is $aListOfStrings.');
+  print('aNullableListOfStrings is $aNullableListOfStrings.');
+  print('aListOfNullableStrings is $aListOfNullableStrings.');
+}
+
+//- El operador de afirmacion nula (!)
+
+//Ejercicio Asercion nula
+int? couldReturnNullButDoesnt() => -3;
+
+void main() {
+  int? couldBeNullButIsnt = 1;
+  List<int?> listThatCouldHoldNulls = [2, null, 4];
+
+  int a = couldBeNullButIsnt;
+  int b = listThatCouldHoldNulls.first; // first item in the list
+  int c = couldReturnNullButDoesnt().abs(); // absolute value
+
+  print('a is $a.');
+  print('b is $b.');
+  print('c is $c.');
+}
+
+//- Operadores conscientes de nulo
+
+//Ejercicio Acceso a propiedad condicional
+int? stringLength(String? nullableString) {
+  return nullableString?.length;
+}
+
+//Ejercicio Operadores de fusion nula
+abstract class Store {
+  int? storedNullableValue;
+
+  /// If [storedNullableValue] is currently `null`,
+  /// set it to the result of [calculateValue] 
+  /// or `0` if [calculateValue] returns `null`.
+  void updateStoredValue() {
+    storedNullableValue ??= calculateValue() ?? 0;
+  }
+
+  /// Calculates a value to be used,
+  /// potentially `null`.
+  int? calculateValue();
+}
+
+//- Tipo Promocion
+
+//Ejercicio Asignacion definitiva
+void main() {
+  String text;
+
+  //if (DateTime.now().hour < 12) {
+  //  text = "It's morning! Let's make aloo paratha!";
+  //} else {
+  //  text = "It's afternoon! Let's make biryani!";
+  //}
+
+  print(text);
+  print(text.length);
+}
+
+//Ejercicio Comprobacion de nulos
+int getLength(String? str) {
+  // Add null check here
+
+  return str.length;
+}
+
+void main() {
+  print(getLength('This is a string!'));
+}
+
+//Ejercicio Promocion con excepciones
+int getLength(String? str) {
+  // Try throwing an exception here if `str` is null.
+
+  return str.length;
+}
+
+void main() {
+  print(getLength(null));
+}
+
+//- La palabra clave tardia
+
+//Ejercicio Uso tardío
+class Meal {
+  String _description;
+
+  set description(String desc) {
+    _description = 'Meal description: $desc';
+  }
+
+  String get description => _description;
+}
+
+void main() {
+  final myMeal = Meal();
+  myMeal.description = 'Feijoada!';
+  print(myMeal.description);
+}
+
+Ejercicio Referencias Circulares tardías
+class Team {
+  final Coach coach;
+}
+
+class Coach {
+  final Team team;
+}
+
+void main() {
+  final myTeam = Team();
+  final myCoach = Coach();
+  myTeam.coach = myCoach;
+  myCoach.team = myTeam;
+
+  print('All done!');
+}
+
+//Ejercicio Tarde y Perezoso
+int _computeValue() {
+  print('In _computeValue...');
+  return 3;
+}
+
+class CachedValueProvider {
+  final _cache = _computeValue();
+  int get value => _cache;
+}
+
+void main() {
+  print('Calling constructor...');
+  var provider = CachedValueProvider();
+  print('Getting value...');
+  print('The value is ${provider.value}!');
+}

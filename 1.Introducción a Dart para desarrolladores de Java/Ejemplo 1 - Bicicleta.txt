@@ -1,0 +1,31 @@
+//EJERCICIO BICICLETA usando clase
+
+void main() {
+  //2.Creando instancia e Imprimirla
+  var bike = Bicycle(2, 1);
+  print(bike);
+}
+
+//1.Definiendo clase
+class Bicycle {
+  int cadence;
+  int _speed= 0; //speed en provado e iniciado en 0
+  int gear;
+  int get speed =>_speed;//lectura con get
+  
+  //3.Creando Constructor de clase Bicycle
+  Bicycle(this.cadence, this.gear);
+  
+  //4.Metodo anulador como miembro intencional
+  @override
+  String toString() => 'Bicycle: $speed mph';
+  
+  //Implementación speed como instancia de solo lectura en su variable
+  void applyBrake(int decrement) {
+  _speed -= decrement;
+  }
+
+  void speedUp(int increment) {
+    _speed += increment;
+  }
+}

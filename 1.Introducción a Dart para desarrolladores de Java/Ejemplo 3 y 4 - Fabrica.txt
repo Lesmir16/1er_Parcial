@@ -1,0 +1,49 @@
+//EJERCICIO Fabrica - Mostrar objeto existente
+
+import 'dart:math';
+
+main() {
+  //Invocar las funciones circle y square
+  final circle = Shape('circle');
+  final square = Shape('square');
+  //Imprimiendo el area de cada figura
+  print(circle.area);
+  print(square.area);
+}
+ //Aplicando clase Shapes como instancia
+ //Creando clase abstrata
+abstract class Shape {
+  //Funcion implementa en Factory para retornar figura que corresponde
+  factory Shape(String type) {
+    if (type == 'circle') return Circle(2);
+    if (type == 'square') return Square(2);
+    //Presenta error encontrado
+    throw 'Can\'t create $type.';
+  }
+  num get area;
+}
+
+//Metodo get para calcular el radio de Circle
+class Circle implements Shape {
+  final num radius;
+  Circle(this.radius);
+  num get area => pi * pow(radius, 2);
+}
+
+//Metodo get para calcular el side de Square
+class Square implements Shape {
+  final num side;
+  Square(this.side);
+  num get area => pow(side, 2);
+}
+
+//Implementando interfaz a las clases Circle e Square
+class CircleMock implements Circle {
+  num area = 0;
+  num radius = 0;
+}
+
+class SquareMock implements Square {
+  num area = 0;
+  num side = 0;
+}

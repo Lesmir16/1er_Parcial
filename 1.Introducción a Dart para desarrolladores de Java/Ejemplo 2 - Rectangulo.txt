@@ -1,0 +1,30 @@
+//EJERCICIO Rectangle usando parametros.
+
+import 'dart:math';
+main() {
+  //4.Inprimir constructor Rectangle con parametros
+  print(Rectangle(origin: const Point(10, 20), width: 100, height: 200));
+  print(Rectangle(origin: const Point(10, 10)));
+  print(Rectangle(width: 200));
+  print(Rectangle());
+} /* Included main() 
+           * to suppress uncaught 
+           * exception.*/
+
+//1. Definiendo Clase
+class Rectangle {
+  int width;
+  int height;
+  Point origin;
+  
+  //2.Agregando Constructores a Rectangle
+  Rectangle({
+    this.origin = const Point(0, 0), /*especifica un valor predeterminado de Point para var instancia origin*/
+    this.width = 0, 
+    this.height = 0});
+  
+  //3.Agregando función toString a Rectangle
+  @override
+  String toString() =>
+      'Origin: (${origin.x}, ${origin.y}), width: $width, height: $height';
+}
